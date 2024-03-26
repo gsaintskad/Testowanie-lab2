@@ -15,18 +15,26 @@ public:
 
 
     //openValve - wywołanie tej metody informuje nas czy należy otworzyć albo zamknąć obwód grzewczy
-    virtual bool openValve(int expectedTemp) = 0;
+    virtual bool openValve() = 0;
+
+  
+    
 };
 
 class ValveController : public IValveController
 {
 public:
+
     virtual void setTempSensor(ITemperatureSensor* temperatureSensor) override;
     virtual void setExpectedTemp(int expectedTemp) override;
-    virtual bool openValve(int expectedTemp) override;
+    virtual bool openValve() override;
+
+
 private:
+    
     ITemperatureSensor* tempSensor;
     int expectedTemperature;
     bool isTempReached;
+    
 };
 

@@ -16,7 +16,8 @@ int main(int argc, char* argv[])
     valveController.setExpectedTemp(expectedTemp);
     // 19   20   21    20    20    19   19   20   21
     // true true false false false true true true false
-    vector<bool> expectedPosition = { 1,1,0,0,0,1,1,1,0 };
+    vector<bool> expectedPosition = { true, true, false, false, false, true, true, true, false };
+
     //for each(;;) // sprawdzamy kolejne kroki scenariusza testowego
     //{
     //    if (valveController.openValve(expectedTemp) != expectedPosition)
@@ -26,7 +27,7 @@ int main(int argc, char* argv[])
     //}
     for(int i=0;i<expectedPosition.size();i++)
     {
-        if (valveController.openValve(expectedTemp) != expectedPosition[i]) {
+        if (valveController.openValve() != expectedPosition[i]) {
             cout << "Vlave controller is working uncorrectly !" << endl;
         }
     }
