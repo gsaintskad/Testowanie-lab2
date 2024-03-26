@@ -1,0 +1,31 @@
+﻿Celem zadania jest przetestowanie klasy sterującej zaworem w obwodzie grzewczym.
+
+Klasa sterująca zaworem zawiera dwie główne metody:
+setExpectedTemperature - podajemy tutaj temperaturę jaką chcemy osiągnąć w pomieszczeniu.
+openValve - wywołanie tej metody informuje nas czy należy otworzyć albo zamknąć obwód grzewczy
+
+Dodatkowo sterownik zaworu do swojego działania potrzebuje informacji o aktualnej temperaturze.
+W tym celu należy mu wstrzyknąć (Dependency Injection) obiekt czujnika temperatury.
+
+Zawór powinien zmienić swoje położenie jeżeli temperatura osiągnie wartość różną od zadanej, np:
+Zadana temperatura 20. Scenariusz: <19 - otwarty, 20 - otwarty, 20 - otwarty, 21 - zamknięty, 20 - zamknięty, 20 - zamknięty, 19 - otwarty>
+
+
+Na potrzeby testów jednostkowych należy zaimplementować testowy czujnik temperatury, który będzie zwracać temperatury zgodne z naszym scenariuszem testowym.
+
+Kod produkcyjny powinien być zaimplementowany z wykorzystaniem luźnego wiązania między obiektami - interfejsy oraz Dependency Injection.
+
+1. Projekt produkcyjny:
+valve_controller_if.h
+    valve_controller.h
+    valve_controller.cpp
+temperature_sensor_if.h
+    temperature_sensor.h
+    temperature_sensor.cpp
+main.cpp
+...
+2. Projekt testy jednostkowe
+Dodaj istniejące: valve_controller.h valve_controller.cpp
+temperature_sensor_mock.h - dodać testową metodę setTemperatures(std::vector<int>)
+temperatur_sensor_mock.cpp
+main.cpp
