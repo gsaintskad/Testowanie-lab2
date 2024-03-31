@@ -17,7 +17,7 @@ public:
     //openValve - wywołanie tej metody informuje nas czy należy otworzyć albo zamknąć obwód grzewczy
     virtual bool openValve() = 0;
 
-  
+    virtual void setTemperatures(std::vector<int> newTemperatures)=0;
     
 };
 
@@ -28,6 +28,7 @@ public:
     virtual void setTempSensor(ITemperatureSensor* temperatureSensor) override;
     virtual void setExpectedTemp(int expectedTemp) override;
     virtual bool openValve() override;
+    virtual void setTemperatures(std::vector<int> newTemperatures) override;
 
 
 private:

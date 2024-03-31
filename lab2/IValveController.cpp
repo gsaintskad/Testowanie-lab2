@@ -58,3 +58,8 @@ bool ValveController::openValve()
    
 }
 
+void ValveController::setTemperatures(std::vector<int> newTemperatures)
+{
+    this->tempSensor->setTemperatures(newTemperatures);
+}
+
