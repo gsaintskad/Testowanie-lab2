@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     valveController.setExpectedTemp(expectedTemp);
     // 19   20   21    20    20    19   19   20   21
     // true true false false false true true true false
-    vector<bool> expectedPosition = { true, true, false, false, false, true, true, true, false };
+    vector<bool> expectedPosition = { true, true, false, false, false,false,false, true, true, true, false };
 
     //for each(;;) // sprawdzamy kolejne kroki scenariusza testowego
     //{
@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
     //        // błąd
     //    }
     //}
+    // { 19, 20, 21, 20, 20,20,20, 19, 19, 20, 21 };
     for(int i=0;i<expectedPosition.size();i++)
     {
         if (valveController.openValve() != expectedPosition[i]) {
