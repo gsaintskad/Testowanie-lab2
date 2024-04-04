@@ -1,5 +1,7 @@
 ﻿#include "../lab2/ITemperatureSensor.h"
 #include "../lab2/IValveController.h"
+#include"temperature_sensor_mock.h"
+#include"IValveTester.h"
 #include<iostream>
 #include<vector>
 
@@ -10,26 +12,16 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     int expectedTemp = 20;
-    UTTemperatureSensor tempSensor;
+    temperature_sensor_mock tempSensor;
     ValveController valveController;
     valveController.setTempSensor(&tempSensor);
     valveController.setExpectedTemp(expectedTemp);
     // 19   20   21    20    20    19   19   20   21
     // true true false false false true true true false
-    vector<bool> expectedPosition = { true, true, false, false, false,false,false, true, true, true, false };
+    vector<bool> expectedPosition1 = { true, true, false, false, false,false,false, true, true, true, false };
+    vector<int> testTemperatures1 = { 19, 20, 21, 20, 20,20,20, 19, 19, 20, 21 };
 
-    //for each(;;) // sprawdzamy kolejne kroki scenariusza testowego
-    //{
-    //    if (valveController.openValve(expectedTemp) != expectedPosition)
-    //    {
-    //        // błąd
-    //    }
-    //}
-    // { 19, 20, 21, 20, 20,20,20, 19, 19, 20, 21 };
-    for (int i = 0; i < expectedPosition.size(); i++)
-    {
-        if (valveController.openValve() != expectedPosition[i]) {
-            cout << "Vlave controller is working uncorrectly !" << endl;
-        }
-    }
+    ValveTester valveTester(&valveController);
+    
+    valveTester.validate(testTemperatures1, expectedPosition1);
 }

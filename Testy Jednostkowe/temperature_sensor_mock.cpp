@@ -6,3 +6,14 @@
 //
 //	
 //}
+
+int temperature_sensor_mock::getTemperature()
+{
+    return testTemperatures[i++];
+}
+
+void temperature_sensor_mock::setTemperatures(std::vector<int> newTemperatures)
+{
+    testTemperatures = newTemperatures;
+    i = 0;
+}
