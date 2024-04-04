@@ -1,6 +1,7 @@
 #pragma once
 #include"../lab2/IValveController.h"
 #include<vector>
+#include<string>
 class IValveTester
 {
 public:
@@ -24,6 +25,18 @@ private:
 
 	// Inherited via IValveTester
 
+};
+class ValveTesterException : public std::exception{
+public:
+	 std::string what(){
+		int test_index; 
+		char* explanation;
+		return ("\nRecived temperature: " +recievedTemp+ "\n IsOpen: "+ isOpen+"\n IsTempReached: " + isTempReached);
+	}
+private:
+	int recievedTemp;
+	bool isOpen;
+	bool isTempReached;
 };
 
 

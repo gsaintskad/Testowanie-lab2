@@ -38,9 +38,9 @@ int main(int argc, char* argv[])
 
     
 
-    valveTester.validate(testTemperatures1, expectedPosition1);
+    cout<<valveTester.validate(testTemperatures1, expectedPosition1);
     cout << "\n\n\n---------------------------------------------------------------------------------------\n\n\n";
-    valveTester.validate(testTemperatures2, expectedPosition2);
+    cout << valveTester.validate(testTemperatures2, expectedPosition2);
 
 
     cout << "\n\n\n---------------------------------------------------------------------------------------\n\n\n";
@@ -49,8 +49,8 @@ int main(int argc, char* argv[])
 
     valveController.setExpectedTemp(50);
 
-    vector<bool> expectedPosition3 = { 1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,0 };
+    vector<bool> expectedPosition3 = { 1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0 };
     vector<int> testTemperatures3 = { 44,45,46,47,48,49,50,51,51,51,51,50,50,50,49,49,49,50,50,51 };
 
-    valveTester.validate(testTemperatures3, expectedPosition3);
+    cout << valveTester.validate(testTemperatures3, expectedPosition3);
 }
