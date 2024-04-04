@@ -12,6 +12,11 @@ ValveTester::~ValveTester()
 
 bool ValveTester::validate(const std::vector<int>& TemperatureScript, const std::vector<bool>& EstimatedPositions)
 {
+    if (TemperatureScript.size() != EstimatedPositions.size()) {
+        throw std::exception("Different sizes of testing arrays!");
+    }
+
+
     this->valveController->setTemperatures(TemperatureScript);
 
     for (int i = 0; i < EstimatedPositions.size(); i++) {

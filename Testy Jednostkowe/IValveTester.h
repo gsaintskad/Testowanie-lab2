@@ -11,11 +11,11 @@ class ValveTester: public IValveTester
 {
 public:
 	ValveTester(IValveController* valveController);
+	bool validate(const std::vector<int>& TemperatureScript, const std::vector<bool>& EstimatedPositions) override;
 	~ValveTester();
 
 //	bool validate() override;
 
-	bool validate(const std::vector<int>& TemperatureScript, const std::vector<bool>& EstimatedPositions) override;
 private:
 	IValveController* valveController=nullptr;
 
@@ -25,6 +25,8 @@ private:
 	// Inherited via IValveTester
 
 };
+
+
 
 
 

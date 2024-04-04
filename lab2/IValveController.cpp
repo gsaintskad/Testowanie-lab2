@@ -33,13 +33,18 @@ bool ValveController::openValve()
     }
     
     bool isOpen = (recievedTemp <= this->expectedTemperature) && !this->isTempReached;
-    std::cout <<"\n-----------------------------------"
+   /* std::cout <<"\n-----------------------------------"
         << "\nRecived temperature: " << recievedTemp
         << "\n IsOpen: " << isOpen 
         << "\n IsTempReached: " << this->isTempReached;
+    */
     
-    
-    if (this->isTempReached) return false;
+    if (this->isTempReached) {
+
+
+
+        return false;
+    } 
 
     if (isOpen) {
 
