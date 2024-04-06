@@ -1,7 +1,9 @@
 #pragma once
 #include"../lab2/IValveController.h"
 #include<vector>
+#include<iostream>
 #include<string>
+
 class IValveTester
 {
 public:
@@ -19,6 +21,7 @@ public:
 
 private:
 	IValveController* valveController=nullptr;
+	static unsigned int testID;
 
 	// Inherited via IValveTester
 
@@ -26,17 +29,16 @@ private:
 	// Inherited via IValveTester
 
 };
-class ValveTesterException : public std::exception{
+
+
+class myException :public std::exception {
 public:
-	std::string what(); 
-	ValveTesterException(int id, int recievedTemp, bool isOpen, bool isTempReached);
+	myException(std::string s);
+	std::string what();
 private:
-	int test_index;
-	int recievedTemp;
-	bool isOpen;
-	bool isTempReached;
-};
+	std::string toWhat;
 
+};
 
 
 
