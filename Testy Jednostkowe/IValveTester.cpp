@@ -40,3 +40,19 @@ bool ValveTester::validate(const std::vector<int>& TemperatureScript, const std:
 //        }
 //    }*/
 //}
+
+std::string ValveTesterException::what()
+{
+   
+    return std::string("\nComparing temperatures index : " + this->test_index) + std::string("\nRecived temperature: " + std::to_string(recievedTemp) + "\n IsOpen: " + std::to_string(isOpen) + "\n IsTempReached: " + std::to_string(isTempReached));
+    
+}
+
+ValveTesterException::ValveTesterException(int id, int recievedTemp, bool isOpen, bool isTempReached)
+{
+    this->test_index = id;
+    this->isTempReached = isTempReached;
+    this->isOpen = isOpen;
+    this->recievedTemp = recievedTemp;
+}
+

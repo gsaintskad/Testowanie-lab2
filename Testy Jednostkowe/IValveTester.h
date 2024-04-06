@@ -28,12 +28,10 @@ private:
 };
 class ValveTesterException : public std::exception{
 public:
-	 std::string what(){
-		int test_index; 
-		char* explanation;
-		return ("\nRecived temperature: " +recievedTemp+ "\n IsOpen: "+ isOpen+"\n IsTempReached: " + isTempReached);
-	}
+	std::string what(); 
+	ValveTesterException(int id, int recievedTemp, bool isOpen, bool isTempReached);
 private:
+	int test_index;
 	int recievedTemp;
 	bool isOpen;
 	bool isTempReached;
