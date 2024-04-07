@@ -7,14 +7,14 @@
 class IValveTester
 {
 public:
-	virtual bool validate(const std::vector<int>& TemperatureScript, const std::vector<bool>& EstimatedPositions) = 0;
+	virtual bool validate( const std::vector<bool>& EstimatedPositions) = 0;
 };
 
 class ValveTester: public IValveTester
 {
 public:
 	ValveTester(IValveController* valveController);
-	bool validate(const std::vector<int>& TemperatureScript, const std::vector<bool>& EstimatedPositions) override;
+	bool validate(const std::vector<bool>& EstimatedPositions) override;
 	~ValveTester();
 
 //	bool validate() override;
@@ -31,14 +31,6 @@ private:
 };
 
 
-class myException :public std::exception {
-public:
-	myException(std::string s);
-	std::string what();
-private:
-	std::string toWhat;
-
-};
 
 
 

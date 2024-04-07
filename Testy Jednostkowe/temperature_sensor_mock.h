@@ -13,7 +13,7 @@ public:
 
 	// Inherited via ITemperatureSensor
 	int getTemperature() override;
-	void setTemperatures(std::vector<int> newTemperatures) override;
+	void setTemperatures(std::vector<int> newTemperatures);
 private:
 	std::vector<int> testTemperatures;
 	int i=0;

@@ -41,8 +41,6 @@ bool ValveController::openValve()
     
     if (this->isTempReached) {
 
-
-
         return false;
     } 
 
@@ -61,10 +59,5 @@ bool ValveController::openValve()
   
   
    
-}
-
-void ValveController::setTemperatures(std::vector<int> newTemperatures)
-{
-    this->tempSensor->setTemperatures(newTemperatures);
 }
 

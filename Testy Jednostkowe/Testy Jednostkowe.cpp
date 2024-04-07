@@ -107,8 +107,19 @@ int main(int argc, char* argv[])
     for (int i = 0; i < TEST_TEMPERATURES.size(); i++) {
         try
         {
+            cout << "\nTest #" << i+1 << "\t";
+
+
+            if (TEST_TEMPERATURES[i].size() != EXPECTED_POSITIONS[i].size()) {
+                throw std::exception("Different sizes of testing arrays!\n");
+            }
+
             valveController.setExpectedTemp(EXPECTED_TEMPS[i]);
-            valveTester.validate(TEST_TEMPERATURES[i], EXPECTED_POSITIONS[i]);
+            tempSensor.setTemperatures(TEST_TEMPERATURES[i]);
+
+            valveTester.validate(EXPECTED_POSITIONS[i]);
+
+            cout << "complete succesfully!\n";
 
         }
         catch (const std::exception& ex)
@@ -118,7 +129,10 @@ int main(int argc, char* argv[])
         catch (const std::string& ex) {
             cout << ex;
         }
-        
+
+
+
+
     }
     cout << "\n\n===============END TESTING===============\n\n";
 
