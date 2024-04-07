@@ -1,5 +1,6 @@
 ﻿#include "../lab2/ITemperatureSensor.h"
 #include "../lab2/IValveController.h"
+#include "../lab2/ValveController.h"
 #include"temperature_sensor_mock.h"
 #include"IValveTester.h"
 #include<iostream>
@@ -71,7 +72,7 @@ int main(int argc, char* argv[])
 
 
 
-    ////// TEST SETS
+    ////// TEST SETS DEFINING
 
     vector<vector<int>>TEST_TEMPERATURES = { testTemperatures1,testTemperatures2,testTemperatures3,testTemperatures4,testTemperatures5,testTemperatures6 };
     vector<vector<bool>>EXPECTED_POSITIONS = { expectedPosition1,expectedPosition2,expectedPosition3,expectedPosition4,expectedPosition5,expectedPosition6 };

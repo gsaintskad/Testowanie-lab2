@@ -130,10 +130,12 @@
     <ClCompile Include="ITemperatureSensor.cpp" />
     <ClCompile Include="IValveController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ValveController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITemperatureSensor.h" />
     <ClInclude Include="IValveController.h" />
+    <ClInclude Include="ValveController.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Text.txt" />

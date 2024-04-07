@@ -24,12 +24,18 @@
     <ClCompile Include="IValveController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ValveController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITemperatureSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IValveController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValveController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

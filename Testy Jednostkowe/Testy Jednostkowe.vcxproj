@@ -127,11 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lab2\ITemperatureSensor.cpp" />
-    <ClCompile Include="..\lab2\IValveController.cpp" />
+    <ClCompile Include="..\lab2\ValveController.cpp" />
+    <ClCompile Include="UTTemperatureSensor.cpp" />
     <ClCompile Include="IValveTester.cpp" />
     <ClCompile Include="temperature_sensor_mock.cpp" />
-    <ClCompile Include="Testy Jednostkowe.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lab2\lab2.vcxproj">
@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="..\lab2\ITemperatureSensor.h" />
     <ClInclude Include="..\lab2\IValveController.h" />
+    <ClInclude Include="UTTemperatureSensor.h" />
     <ClInclude Include="IValveTester.h" />
     <ClInclude Include="temperature_sensor_mock.h" />
   </ItemGroup>
