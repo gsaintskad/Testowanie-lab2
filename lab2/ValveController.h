@@ -15,7 +15,7 @@ private:
 
     ITemperatureSensor* tempSensor;
     int expectedTemperature;
-    bool isTempReached;
+    bool isOpen;
 
 };
 

@@ -1,7 +1,7 @@
 #include "IValveTester.h"
 
 
-unsigned int ValveTester::testID = 0;
+
 
 ValveTester::ValveTester(IValveController* valveController)
 {
@@ -27,8 +27,6 @@ bool ValveTester::validate(const std::vector<bool>& EstimatedPositions)
         bool ValveControllerResult = this->valveController->openValve();
 
         if (ValveControllerResult != EstimatedPositions[i]) {
-
-          
             throw std::string("Incorrect work of ValveController while validating on array id :"+std::to_string(i)+"\n");
         }
         

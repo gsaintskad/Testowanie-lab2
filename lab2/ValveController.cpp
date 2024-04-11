@@ -16,7 +16,7 @@ void ValveController::setTempSensor(ITemperatureSensor* temperatureSensor)
 void ValveController::setExpectedTemp(int expectedTemp)
 {
     this->expectedTemperature = expectedTemp;
-    this->isTempReached = 0;
+    this->isOpen = 0;
 }
 
 
@@ -27,38 +27,15 @@ void ValveController::setExpectedTemp(int expectedTemp)
 bool ValveController::openValve()
 {
     int recievedTemp = tempSensor->getTemperature();
-
-    if (this->isTempReached) {
-        this->isTempReached = recievedTemp >= this->expectedTemperature;
-
+    
+    if (recievedTemp > this->expectedTemperature) {
+        this->isOpen = false;
+    }
+    else if (recievedTemp < this->expectedTemperature)
+    {
+        this->isOpen = true;
     }
 
-    bool isOpen = (recievedTemp <= this->expectedTemperature) && !this->isTempReached;
-    /* std::cout <<"\n-----------------------------------"
-         << "\nRecived temperature: " << recievedTemp
-         << "\n IsOpen: " << isOpen
-         << "\n IsTempReached: " << this->isTempReached;
-     */
-
-    if (this->isTempReached) {
-
-        return false;
-    }
-
-    if (isOpen) {
-
-
-        return true;
-    }
-    else {
-        this->isTempReached = 1;
-        return false;
-    }
-
-
-
-
-
-
+    return this->isOpen;
 }
 

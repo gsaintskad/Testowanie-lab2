@@ -24,9 +24,6 @@
     <ClCompile Include="IValveTester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UTTemperatureSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\lab2\ValveController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,9 +39,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IValveTester.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UTTemperatureSensor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

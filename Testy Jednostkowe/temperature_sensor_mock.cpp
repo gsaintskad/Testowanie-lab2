@@ -9,6 +9,9 @@
 
 int temperature_sensor_mock::getTemperature()
 {
+    if (!(i < testTemperatures.size())) {
+        throw std::exception("i is out of range testTemperaturesSet.");
+    }
     return testTemperatures[i++];
 }
 
