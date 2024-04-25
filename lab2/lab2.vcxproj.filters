@@ -42,4 +42,7 @@
   <ItemGroup>
     <Text Include="Text.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>
