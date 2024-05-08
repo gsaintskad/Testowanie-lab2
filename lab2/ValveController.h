@@ -4,7 +4,8 @@
 class ValveController:public IValveController
 {
 public:
-
+    ValveController();
+    ValveController(ITemperatureSensor* tS);
     virtual void setTempSensor(ITemperatureSensor* temperatureSensor) override;
     virtual void setExpectedTemp(int expectedTemp) override;
     virtual bool openValve() override;

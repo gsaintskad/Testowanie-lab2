@@ -2,6 +2,15 @@
 
 #include<iostream>
 
+ValveController::ValveController()
+{
+}
+
+ValveController::ValveController(ITemperatureSensor* tS)
+{
+    this->tempSensor = tS;
+}
+
 /*
     * Dodatkowo sterownik zaworu do swojego działania potrzebuje informacji o aktualnej temperaturze.
     * W tym celu należy mu wstrzyknąć (Dependency Injection) obiekt czujnika temperatury.
