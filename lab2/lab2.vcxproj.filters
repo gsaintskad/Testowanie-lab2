@@ -27,6 +27,9 @@
     <ClCompile Include="ValveController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ValveControllerHister.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITemperatureSensor.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ValveController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValveControllerHister.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

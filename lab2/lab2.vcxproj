@@ -131,11 +131,13 @@
     <ClCompile Include="IValveController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ValveController.cpp" />
+    <ClCompile Include="ValveControllerHister.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ITemperatureSensor.h" />
     <ClInclude Include="IValveController.h" />
     <ClInclude Include="ValveController.h" />
+    <ClInclude Include="ValveControllerHister.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Text.txt" />

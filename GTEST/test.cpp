@@ -1,14 +1,20 @@
 ﻿#include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../lab2/ValveController.h"
+#include "../lab2/ValveControllerHister.h"
+#
 
 class TemperatureSensorMOCK:public ITemperatureSensor {
 public:
 	MOCK_METHOD(int, getTemperature, (),(override));
 };
+//class TemperatureSensorHisterMOCK :public ITemperatureSensor {
+//public:
+//    using vectINT = std::vector<int>;
+//    MOCK_METHOD(vectINT, getTemperatureHister, ());
+//};
 
 ValveController valveController;
-TEST(ValeConrollerTests, exmpTemp20_1) {
+TEST(ValveConrollerTests, exmpTemp20_1) {
     TemperatureSensorMOCK* tempSensor=new TemperatureSensorMOCK();
     valveController.setTempSensor(tempSensor);
     valveController.setExpectedTemp(20);
@@ -27,7 +33,7 @@ TEST(ValeConrollerTests, exmpTemp20_1) {
     delete tempSensor;
 }
 
-TEST(ValeConrollerTests, exmpTemp20_2) {
+TEST(ValveConrollerTests, exmpTemp20_2) {
     TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
     valveController.setTempSensor(tempSensor);
 
@@ -48,7 +54,7 @@ TEST(ValeConrollerTests, exmpTemp20_2) {
 }
 
 
-TEST(ValeConrollerTests, exmpTemp50_1) {
+TEST(ValveConrollerTests, exmpTemp50_1) {
     TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
     valveController.setTempSensor(tempSensor);
 
@@ -67,7 +73,7 @@ TEST(ValeConrollerTests, exmpTemp50_1) {
 
     delete tempSensor;
 }
-TEST(ValeConrollerTests, exmpTemp50_2) {
+TEST(ValveConrollerTests, exmpTemp50_2) {
     TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
     valveController.setTempSensor(tempSensor);
     valveController.setExpectedTemp(50);
@@ -85,7 +91,7 @@ TEST(ValeConrollerTests, exmpTemp50_2) {
     delete tempSensor;
 }
 
-TEST(ValeConrollerTests, MissingTempSensor) {
+TEST(ValveConrollerTests, MissingTempSensor) {
     TemperatureSensorMOCK* tempSensor = nullptr;
     valveController.setTempSensor(tempSensor);
     valveController.setExpectedTemp(50);
@@ -104,4 +110,42 @@ TEST(ValeConrollerTests, MissingTempSensor) {
     }
    
    
+}
+
+TEST(ValveConrollerTests, Histereza) {
+    ValveControllerHister valveControllerHister;
+    TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
+   // TemperatureSensorHisterMOCK* tempSensor = new TemperatureSensorHisterMOCK();
+    valveControllerHister.setTempSensor(tempSensor);
+
+    valveControllerHister.setExpectedTemp(20);
+
+    std::vector<int> temperatures = { 19, 20, 21,21,21,21, 20, 20,20,20, 19, 19, 20, 21,21,22 };
+    std::vector<bool> expectedPositions = { true, false,true,false };
+    ::testing::Sequence seq;
+
+    
+    auto itB = temperatures.begin(), itE=temperatures.end();
+
+    //EXPECT_CALL(*tempSensor, getTemperature()).WillRepeatedly([&]() {
+    //        int value = *itB;
+    //        ++itB;
+    //        if (itB ==itE)
+    //            itB = temperatures.begin(); // Циклически вернуться к началу набора
+    //        return value;
+    //    });
+
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+    }
+
+
+    //throw std::exception("ajksdhklajshdkjahsh");
+    for (size_t i = 0; i < expectedPositions.size(); ++i) {
+       
+       
+        bool actual = valveControllerHister.openValve();
+        EXPECT_EQ(actual, expectedPositions[i]) << "Failure at position " << i + 1;
+    }
+    delete tempSensor;
 }

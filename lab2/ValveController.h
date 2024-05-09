@@ -12,7 +12,7 @@ public:
 
 
 
-private:
+protected:
 
     ITemperatureSensor* tempSensor;
     int expectedTemperature;
