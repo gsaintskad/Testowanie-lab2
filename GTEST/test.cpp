@@ -1,4 +1,4 @@
-#include "gtest/gtest.h"
+﻿#include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include "../lab2/ValveController.h"
 
@@ -17,18 +17,11 @@ TEST(ValeConrollerTests, exmpTemp20_1) {
     std::vector<bool> expectedPositions = { true, true, false, false, false,false,false, true, true, true, false };
    
     ::testing::Sequence seq;
-    try
-    {
-        for (size_t i = 0; i < temperatures.size(); ++i) {
-            EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
-            bool expected = expectedPositions[i];
-            bool actual = valveController.openValve();
-            EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
-        }
-    }
-    catch (const std::exception& ex)
-    {
-        std::cout << ex.what() << std::endl;
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+        bool expected = expectedPositions[i];
+        bool actual = valveController.openValve();
+        EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
 
     delete tempSensor;
@@ -45,18 +38,11 @@ TEST(ValeConrollerTests, exmpTemp20_2) {
 
     ::testing::Sequence seq;
 
-    try
-    {
-        for (size_t i = 0; i < temperatures.size(); ++i) {
-            EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
-            bool expected = expectedPositions[i];
-            bool actual = valveController.openValve();
-            EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
-        }
-    }
-    catch (const std::exception& ex)
-    {
-        std::cout << ex.what() << std::endl;
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+        bool expected = expectedPositions[i];
+        bool actual = valveController.openValve();
+        EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
     delete tempSensor;
 }
@@ -72,18 +58,11 @@ TEST(ValeConrollerTests, exmpTemp50_1) {
     std::vector<bool> expectedPositions = { 1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,1,0 };
 
     ::testing::Sequence seq;
-    try
-    {
-        for (size_t i = 0; i < temperatures.size(); ++i) {
-            EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
-            bool expected = expectedPositions[i];
-            bool actual = valveController.openValve();
-            EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
-        }
-    }
-    catch (const std::exception& ex)
-    {
-        std::cout << ex.what() << std::endl;
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+        bool expected = expectedPositions[i];
+        bool actual = valveController.openValve();
+        EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
 
     delete tempSensor;
@@ -97,20 +76,12 @@ TEST(ValeConrollerTests, exmpTemp50_2) {
     std::vector<bool> expectedPositions = { 1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,1,1,1,0,0 };
 
     ::testing::Sequence seq;
-    try
-    {
-        for (size_t i = 0; i < temperatures.size(); ++i) {
-            EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
-            bool expected = expectedPositions[i];
-            bool actual = valveController.openValve();
-            EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
-        }
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+        bool expected = expectedPositions[i];
+        bool actual = valveController.openValve();
+        EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
-    catch (const std::exception& ex)
-    {
-        std::cout << ex.what() << std::endl;
-    }
-
     delete tempSensor;
 }
 
@@ -124,10 +95,13 @@ TEST(ValeConrollerTests, MissingTempSensor) {
 
     try
     {
+
         valveController.openValve();
     }
-    catch (const std::exception& ex)
+    catch (const std::string ex) // rzucam string żeby w blok try catch w openValve obsługiwał tylko ten przewidziany wypadek
     {
-        std::cout << ex.what() << std::endl;
+        std::cout << ex << std::endl;
     }
+   
+   
 }
