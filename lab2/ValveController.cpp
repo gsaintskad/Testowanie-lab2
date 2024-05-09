@@ -8,6 +8,8 @@ ValveController::ValveController()
 
 ValveController::ValveController(ITemperatureSensor* tS)
 {
+   
+
     this->tempSensor = tS;
 }
 
@@ -35,6 +37,13 @@ void ValveController::setExpectedTemp(int expectedTemp)
 //openValve - wywołanie tej metody informuje nas czy należy otworzyć albo zamknąć obwód grzewczy
 bool ValveController::openValve()
 {
+
+    if (this->tempSensor == nullptr) {
+        throw std::exception("TemperatureSensor hasn`t been installed.");
+    }
+
+
+
     int recievedTemp = tempSensor->getTemperature();
     
     if (recievedTemp > this->expectedTemperature) {
