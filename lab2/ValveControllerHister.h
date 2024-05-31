@@ -9,6 +9,7 @@ public:
 	void setTempSensor(ITemperatureSensor* temperatureSensor) override;
 	
 private:
-	bool IsTheCallFirst = true;
+	unsigned short int CallNumber=0;
+
 };
 

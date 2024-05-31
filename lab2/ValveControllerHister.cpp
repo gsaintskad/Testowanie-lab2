@@ -1,9 +1,15 @@
 ﻿#include "ValveControllerHister.h"
-
+#include <fstream> 
 #include<iostream>
+
 
 bool ValveControllerHister::openValve()
 {
+    //  std::ofstream outputFile("example.txt");
+
+
+
+
     if (this->tempSensor == nullptr) {
 
         // rzucam string żeby w blok try catch w openValve obsługiwał tylko ten przewidziany wypadek
@@ -11,35 +17,20 @@ bool ValveControllerHister::openValve()
     }
 
 
+    int recievedTemp = tempSensor->getTemperature();
 
-    int recievedTempValues[5] = {};
 
-    if (this->IsTheCallFirst) {
-
-        recievedTempValues[4]= this->tempSensor->getTemperature();
-        this->IsTheCallFirst = false;
-
-    }
-    else {
-
-        for (int i = 0; i < 5; i++) {
-            recievedTempValues[i] = this->tempSensor->getTemperature();
+    if (this->CallNumber%5 == 0) {
+        if (recievedTemp > this->expectedTemperature) {
+            this->isOpen = false;
         }
-
+        else if (recievedTemp < this->expectedTemperature)
+        {
+            this->isOpen = true;
+        }
     }
 
-    if (recievedTempValues[4] > this->expectedTemperature) {
-        this->isOpen = false;
-    }
-    else if (recievedTempValues[4] < this->expectedTemperature)
-    {
-        this->isOpen = true;
-    }
-
-    
-    
-    
-   
+    this->CallNumber++;
 
 
 
@@ -52,5 +43,6 @@ void ValveControllerHister::setTempSensor(ITemperatureSensor* temperatureSensor)
 {
     
     this->tempSensor = temperatureSensor;
-    this->IsTheCallFirst = 0;
+    this->CallNumber=0;
 }
+

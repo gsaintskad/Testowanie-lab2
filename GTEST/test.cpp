@@ -1,7 +1,7 @@
 ﻿#include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include "../lab2/ValveControllerHister.h"
-#
+#include <fstream>
 
 class TemperatureSensorMOCK:public ITemperatureSensor {
 public:
@@ -91,7 +91,7 @@ TEST(ValveConrollerTests, exmpTemp50_2) {
     delete tempSensor;
 }
 
-TEST(ValveConrollerTests, MissingTempSensor) {
+TEST(ValveConrollerMissingTempSensorTest, MissingTempSensor) {
     TemperatureSensorMOCK* tempSensor = nullptr;
     valveController.setTempSensor(tempSensor);
     valveController.setExpectedTemp(50);
@@ -112,40 +112,39 @@ TEST(ValveConrollerTests, MissingTempSensor) {
    
 }
 
-TEST(ValveConrollerTests, Histereza) {
-    ValveControllerHister valveControllerHister;
+TEST(ValveConrollerHisterezaTests, Histereza20Short) {
+    ValveControllerHister valveControllerH;
     TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
-   // TemperatureSensorHisterMOCK* tempSensor = new TemperatureSensorHisterMOCK();
-    valveControllerHister.setTempSensor(tempSensor);
+    valveControllerH.setTempSensor(tempSensor);
+    valveControllerH.setExpectedTemp(20);
 
-    valveControllerHister.setExpectedTemp(20);
+    std::vector<int> temperatures = { 19, 20, 21,21,21,21 };
+    std::vector<bool> expectedPositions = { true,true,true,true,true, false };
 
-    std::vector<int> temperatures = { 19, 20, 21,21,21,21, 20, 20,20,20, 19, 19, 20, 21,21,22 };
-    std::vector<bool> expectedPositions = { true, false,true,false };
     ::testing::Sequence seq;
-
-    
-    auto itB = temperatures.begin(), itE=temperatures.end();
-
-    //EXPECT_CALL(*tempSensor, getTemperature()).WillRepeatedly([&]() {
-    //        int value = *itB;
-    //        ++itB;
-    //        if (itB ==itE)
-    //            itB = temperatures.begin(); // Циклически вернуться к началу набора
-    //        return value;
-    //    });
-
     for (size_t i = 0; i < temperatures.size(); ++i) {
         EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+        bool expected = expectedPositions[i];
+        bool actual = valveControllerH.openValve();
+        EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
+    delete tempSensor;
+}
+TEST(ValveConrollerHisterezaTests, Histereza20Long) {
+    ValveControllerHister valveControllerH;
+    TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
+    valveControllerH.setTempSensor(tempSensor);
+    valveControllerH.setExpectedTemp(20);
+          
+    std::vector<int> temperatures = { 19, 20, 21,21,21,21,20,19,18,17,17,17,17,19,20,20 };
+    std::vector<bool> expectedPositions = { true,true,true,true,true, false,false,false,false,false,true,true,true,true,true,true,false };
 
-
-    //throw std::exception("ajksdhklajshdkjahsh");
-    for (size_t i = 0; i < expectedPositions.size(); ++i) {
-       
-       
-        bool actual = valveControllerHister.openValve();
-        EXPECT_EQ(actual, expectedPositions[i]) << "Failure at position " << i + 1;
+    ::testing::Sequence seq;
+    for (size_t i = 0; i < temperatures.size(); ++i) {
+        EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
+        bool expected = expectedPositions[i];
+        bool actual = valveControllerH.openValve();
+        EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
     delete tempSensor;
 }
