@@ -5,6 +5,7 @@
 class ValveControllerHister : public ValveController
 {
 public: 
+	ValveControllerHister();
 	bool openValve() override;
 	void setTempSensor(ITemperatureSensor* temperatureSensor) override;
 	

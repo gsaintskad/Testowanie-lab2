@@ -119,7 +119,7 @@ TEST(ValveConrollerHisterezaTests, Histereza20Short) {
     valveControllerH.setExpectedTemp(20);
 
     std::vector<int> temperatures = { 19, 20, 21,21,21,21 };
-    std::vector<bool> expectedPositions = { true,true,true,true,true, false };
+    std::vector<bool> expectedPositions = { false,false,false,false,false, false };
 
     ::testing::Sequence seq;
     for (size_t i = 0; i < temperatures.size(); ++i) {
@@ -136,8 +136,9 @@ TEST(ValveConrollerHisterezaTests, Histereza20Long) {
     valveControllerH.setTempSensor(tempSensor);
     valveControllerH.setExpectedTemp(20);
           
-    std::vector<int> temperatures = { 19, 20, 21,21,21,21,20,19,18,17,17,17,17,19,20,20 };
-    std::vector<bool> expectedPositions = { true,true,true,true,true, false,false,false,false,false,true,true,true,true,true,true,false };
+    std::vector<int> temperatures = { 23,22 , 21,20,19,    20,20,21,21,21,   21,20,20,19,19  ,20 };
+
+    std::vector<bool> expectedPositions = { false,false,false,false,true,      true, true,true,true,false,    false,false,false,false,true,  true,true };
 
     ::testing::Sequence seq;
     for (size_t i = 0; i < temperatures.size(); ++i) {

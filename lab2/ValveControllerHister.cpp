@@ -3,6 +3,13 @@
 #include<iostream>
 
 
+ValveControllerHister::ValveControllerHister()
+{
+    this->isOpen = 0;
+
+
+}
+
 bool ValveControllerHister::openValve()
 {
     //  std::ofstream outputFile("example.txt");
@@ -19,18 +26,20 @@ bool ValveControllerHister::openValve()
 
     int recievedTemp = tempSensor->getTemperature();
 
+    this->CallNumber++;
 
-    if (this->CallNumber%5 == 0) {
-        if (recievedTemp > this->expectedTemperature) {
+    if (this->CallNumber >= 5) {
+        if (recievedTemp > this->expectedTemperature && this->isOpen) {
             this->isOpen = false;
+            this->CallNumber = 0;
         }
-        else if (recievedTemp < this->expectedTemperature)
+        else if (recievedTemp < this->expectedTemperature && !this->isOpen)
         {
             this->isOpen = true;
+            this->CallNumber = 0;
         }
     }
 
-    this->CallNumber++;
 
 
 
