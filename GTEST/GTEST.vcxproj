@@ -99,6 +99,7 @@
     <ClCompile Include="..\lab2\ValveController.cpp" />
     <ClCompile Include="..\lab2\ValveControllerHister.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="ValveTester.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lab2\lab2.vcxproj">
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ValveTester.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
