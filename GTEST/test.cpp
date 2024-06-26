@@ -1,5 +1,6 @@
 ﻿#include "gtest/gtest.h"
 #include "gmock/gmock.h"
+
 #include "../lab2/ValveControllerHister.h"
 #include <fstream>
 
@@ -13,11 +14,35 @@ public:
 //    MOCK_METHOD(vectINT, getTemperatureHister, ());
 //};
 
-ValveController valveController;
-TEST(ValveConrollerTests, exmpTemp20_1) {
+
+
+
+class ValveTester : public ::testing::Test
+{
+protected:
+    void SetUp() override {
+        this->valveController = new ValveController();
+    }
+
+    void TearDown() override {
+        delete this->valveController;
+    }
+
+private:
+
+
+public:
+    IValveController* valveController = nullptr;
+
+
+};
+
+
+
+TEST_F(ValveTester, exmpTemp20_1) {
     TemperatureSensorMOCK* tempSensor=new TemperatureSensorMOCK();
-    valveController.setTempSensor(tempSensor);
-    valveController.setExpectedTemp(20);
+    this->valveController->setTempSensor(tempSensor);
+    this->valveController->setExpectedTemp(20);
 
     std::vector<int> temperatures = { 19, 20, 21, 20, 20,20,20, 19, 19, 20, 21 };
     std::vector<bool> expectedPositions = { true, true, false, false, false,false,false, true, true, true, false };
@@ -26,12 +51,16 @@ TEST(ValveConrollerTests, exmpTemp20_1) {
     for (size_t i = 0; i < temperatures.size(); ++i) {
         EXPECT_CALL(*tempSensor, getTemperature()).InSequence(seq).WillOnce(::testing::Return(temperatures[i]));
         bool expected = expectedPositions[i];
-        bool actual = valveController.openValve();
+        bool actual = this->valveController->openValve();
         EXPECT_EQ(actual, expected) << "Failure at position " << i + 1;
     }
 
     delete tempSensor;
 }
+
+
+ValveController valveController;
+
 
 TEST(ValveConrollerTests, exmpTemp20_2) {
     TemperatureSensorMOCK* tempSensor = new TemperatureSensorMOCK();
@@ -103,11 +132,15 @@ TEST(ValveConrollerMissingTempSensorTest, MissingTempSensor) {
     {
 
         valveController.openValve();
+        FAIL();
     }
     catch (const std::string ex) // rzucam string żeby w blok try catch w openValve obsługiwał tylko ten przewidziany wypadek
     {
         std::cout << ex << std::endl;
     }
+
+
+   
    
    
 }

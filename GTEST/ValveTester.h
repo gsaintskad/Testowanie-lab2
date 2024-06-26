@@ -6,9 +6,13 @@
 class ValveTester : public ::testing::Test
 {
 protected:
-    void SetUp() override;
+    void SetUp() override {
 
-    void TearDown() override;
+    }
+
+    void TearDown() override {
+        delete this->valveController;
+    }
 
 private:
     IValveController* valveController=nullptr;
