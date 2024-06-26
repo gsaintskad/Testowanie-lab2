@@ -136,7 +136,7 @@ TEST(ValveConrollerMissingTempSensorTest, MissingTempSensor) {
     }
     catch (const std::string ex) // rzucam string żeby w blok try catch w openValve obsługiwał tylko ten przewidziany wypadek
     {
-        std::cout << ex << std::endl;
+        EXPECT_EQ(ex, "Temperature sensor not injected");
     }
 
 

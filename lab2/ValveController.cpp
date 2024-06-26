@@ -41,7 +41,7 @@ bool ValveController::openValve()
     if (this->tempSensor == nullptr) {
 
         // rzucam string żeby w blok try catch w openValve obsługiwał tylko ten przewidziany wypadek
-        throw std::string("TemperatureSensor hasn`t been installed.");
+        throw std::string("Temperature sensor not injected");
     }
 
    
